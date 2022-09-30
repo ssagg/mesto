@@ -2,7 +2,8 @@
   background-image: url('../../../images/like.svg');
   width: 22px;
   height: 19px;
-  margin: 5px 5px 0 0;
+  border: 0;
+  background-color: transparent;
 }
 
 .card__icon:hover {
