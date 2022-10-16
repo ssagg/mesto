@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
+  <script src="./scripts/index.js" defer>
+  </script>
   <title>Mesto</title>
 </head>
 
@@ -27,48 +29,7 @@
       </section>
 
       <section class="elements">
-        <div class="card">
-          <img class="card__image" src="./images/baikal.jpg" alt="байкал">
-          <div class="card__text">
-            <h3 class="card__title">Байкал</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/big_rif.jfif" alt="рифы">
-          <div class="card__text">
-            <h3 class="card__title">Коралловые рифы</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/amazon.jpg" alt="амазонка">
-          <div class="card__text">
-            <h3 class="card__title">Устья Амазонки</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/antarktida.jpg" alt="антарктида">
-          <div class="card__text">
-            <h3 class="card__title">Антарктида</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/madagaskar.jpg" alt="мадагаскар">
-          <div class="card__text">
-            <h3 class="card__title">Мадагаскар</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/niel.jpg" alt="нил">
-          <div class="card__text">
-            <h3 class="card__title">Нил</h3>
-            <button class="card__icon" type="button"></button>
-          </div>
-        </div>
+        
       </section>
     </main>
 
@@ -78,7 +39,7 @@
       </p>
     </footer>
 
-    <div class="popup">
+    <!--<div class="popup" id="popup-edit" >
       <div class="popup__container">
         <button class="popup__button-close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -90,10 +51,45 @@
           <button class="popup__button-submit" type="submit">Сохранить</button>
         </form>
       </div>
+    </div> -->
+
+    <div class="popup" id="popup-add">
+      <div class="popup__container">
+        <button class="popup__button-close" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="profile-edit" id="profile-edit">
+          <input type="text" class="popup__input popup__input_type_place" placeholder="Название" id="place-name"
+            name="place-name">
+          <input type="text" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" id="place-link"
+            name="place-about">
+          <button class="popup__button-submit-image" type="submit" id="picture-submit">Сохранить</button>
+        </form>
+      </div>
     </div>
+
+
+    <div class="popup-image" id="popup-image">
+      <div class="popup-image__container">
+        <button class="popup-image__button-close" type="button"></button>
+        <img class="popup-image__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Картинка 1">
+        <div class="popup-image__title" id="caption">Заголовок</div>
+      </div>
+    </div>
+
   </div>
-  <script src="./scripts/index.js">
-  </script>
+
+  
+
+  <template class="template">
+    <div class="card">
+      <img class="card__image" src="./images/baikal.jpg" alt="байкал">
+      <button class="card__delete" type="button"></button>
+      <div class="card__text">
+        <h3 class="card__title">Байкал</h3>
+        <button class="card__icon" type="button"></button>
+      </div>  
+    </div>
+</template>
 </body>
 
 </html>

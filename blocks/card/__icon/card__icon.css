@@ -10,8 +10,3 @@
   opacity: 0.5;
   cursor: pointer;
 }
-
-.card__icon:active {
-  background-image: url('../../../images/like_active.svg');
-  opacity: 1;
-}
