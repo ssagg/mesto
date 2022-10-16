@@ -24,85 +24,88 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
-  //let cardName = document.querySelector('.card__text');
-  //let cardImage = document.querySelector('.card__image');
+
   const container = document.querySelector('.elements');
   const template = document.querySelector('.template');
-  const placeInputName = document.getElementById('place-name');
-  const placeInputLink = document.getElementById('place-link')
+
   const addButtonImage = document.getElementById('picture-submit');
 
-  let editButton = document.querySelector('.profile__edit-button');
-  let addButton = document.querySelector('.profile__add-button');
+  let editProfileButton = document.querySelector('.profile__edit-button');
+  let addPlaceButton = document.querySelector('.profile__add-button');
 
+  const editProfilePopup = document.getElementById('popup-edit');
+  const addPlacePopup = document.getElementById('popup-add')
 
-
-  const editPopup = document.getElementById('popup-edit');
-  const addPopup = document.getElementById('popup-add')
   let popupClose = document.querySelector('.popup__button-close');
+
   let profileName = document.querySelector('.profile__name');
   let profileAbout = document.querySelector('.profile__about');
-
-
-
   let formElement = document.querySelector('.popup__container');
-
   let nameInput = document.querySelector('.popup__input_type_name');
   let jobInput = document.querySelector('.popup__input_type_about');
 
- // let img = document.querySelector(".card__image");
+  let popupPlaceClose = document.querySelector('.popup-place__button-close');
+  let formPlaceElement = document.querySelector('.popup-place__container');
+  const placeInputName = document.getElementById('place-name');
+  const placeInputLink = document.getElementById('place-link')
 
+
+  const modal = document.querySelector('.popup-image');
   const popupImage = document.querySelector('.popup-image__image')
-  const modal = document.querySelector(".popup__image");
-
+  const popupImgClose = document.querySelector('.popup-image__button-close');
+  const popupImgTitle = document.querySelector('.popup-image__title')
+ 
 
   const delBtn = document.querySelector('.card__delete');
   const likeBtn = document.querySelector('.card__icon');
     
-
-  //function openImagePopup() {
-  //  modal.style.display = "none";
- // }
-  
-  function showClick() {
+  function editClick() {
       nameInput.value = profileName.textContent;
       jobInput.value = profileAbout.textContent;
-      editPopup.classList.add('popup_opened');
-   
+      editProfilePopup.classList.add('popup_opened');
+    };
+    
+    function addClick() {
+      addPlacePopup.classList.add('popup-place_opened');
+    };
+    
+    function closeProfilePopup() {
+      editProfilePopup.classList.remove('popup_opened');
     }
-    
-    function showClick1() {
-      addPopup.classList.add('popup_opened');
-    }
-    
-    function closePopup() {
-      addPopup.classList.remove('popup_opened');
-    //  editPopup.classList.remove('popup_opened');
-    }
-    
-   // editButton.addEventListener('click', showClick);
-    addButton.addEventListener('click', showClick1);
-   
-    //function formSubmitHandler(evt) {
-     // evt.preventDefault();
-     // profileAbout.textContent = jobInput.value;
-     // profileName.textContent = nameInput.value;
-     // closePopup();
-    //}
-    
-    //formElement.addEventListener('submit', formSubmitHandler);
-    popupClose.addEventListener('click', closePopup);
-    //addButtonImage.addEventListener('submit', createItemNode)
-    
+    function closePlacePopup() {
+      addPlacePopup.classList.remove('popup-place_opened');
+    };
 
-
+    function openImagePopup() {
+      modal.classList.add('popup-image_opened');
+    }
+    function closeImgPopup() {
+      modal.classList.remove('popup-image_opened');
+    }
+    
+    
+    editProfileButton.addEventListener('click', editClick);
+    addPlaceButton.addEventListener('click', addClick);
+    
+   
+    function formProfileSubmitHandler(evt) {
+     evt.preventDefault();
+     profileAbout.textContent = jobInput.value;
+     profileName.textContent = nameInput.value;
+     closeProfilePopup();
+    };
+    
+    formElement.addEventListener('submit', formProfileSubmitHandler);
+    popupClose.addEventListener('click', closeProfilePopup);
+    popupPlaceClose.addEventListener('click', closePlacePopup);
+    popupImgClose.addEventListener('click', closeImgPopup);
+    
   const render = () => {
     initialCards.forEach((item) => {
       const currentItem = createItemNode (item.name, item.link);
       container.append(currentItem);
     });
-    addButtonImage.addEventListener('submit', handleAddBtn);
-    
+    formPlaceElement.addEventListener('submit', handleAddBtn);
   };
   const createItemNode = (name, link) => {
     const currentItem = template.content.cloneNode(true);
@@ -117,20 +120,29 @@ const initialCards = [
     cardLike.addEventListener('click', function (evt) {
       evt.target.classList.toggle('card__icon_active');
     });
-    
+
     delButton.addEventListener('click',handleDelBtn );
-    cardLink.addEventListener('click', openImagePopup);
+
+    cardLink.addEventListener('click', function (evt) {
+      popupImage.src = cardLink.src;
+      popupImage.alt = cardLink.alt ;
+      popupImgTitle.textContent = cardName.textContent;
+
+      openImagePopup();
+
+  });
+
+    
     return currentItem;
   };
 
-  const handleAddBtn= ()=> {
-
+  const handleAddBtn= (evt)=> {
+    evt.preventDefault();
     const item = createItemNode(placeInputName.value, placeInputLink.value);
-   // сardLink.src = placeInputLink.value;
-   // cardName.textContent = placeInputName.value;
-    console.log(сardLink.src,cardName.textContent)
+    placeInputName.value = "";
+    placeInputLink.value = "";
     container.prepend(item);
-    closePopup();
+    closePlacePopup();
   };
 
   const handleDelBtn = (e) => {
@@ -138,33 +150,7 @@ const initialCards = [
     cardEl.remove();
   };
 
-  const openImagePopup=() =>{
-    const popupImage =  document.querySelector('.popup-image');
-   //const cardLink = document.querySelector('.card__image');
-    popupImage.classList.add('.popup-image_opened');
-   // popupImage.src = cardLink.src;
 
-}
-
-
-// Get the modal
-//const modal = document.getElementById("imagePopup");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-//const img = document.querySelector(".card__image");
-//const modalImg = document.getElementById("img01");
-//const captionText = document.getElementById("caption");
-//img.onclick = function(){
-  ////modal.style.display = "block";
- // modalImg.src = this.src;
- // captionText.innerHTML = this.alt;
-//}
-
-// Get the <span> element that closes the modal
-//var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-
-
+  
 
   render();

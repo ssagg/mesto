@@ -28,3 +28,12 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 popupClose.addEventListener('click', closePopup);
+
+
+const openImagePopup = (e) =>{
+    
+  const popupImage =  document.querySelector('.popup-image');
+//  const cardLink = document.querySelector('.card__image');
+   popupImage.classList.add('popup-image_opened');
+// popupImage.src = cardLink.src;
+};
