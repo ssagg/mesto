@@ -63,29 +63,11 @@ function openPopup(popup) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileAbout.textContent;
   popup.classList.add('popup_opened');
-  //popup.classList.add('popup-place_opened');
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
-
-//function editClick() {
-  //nameInput.value = profileName.textContent;
-  //jobInput.value = profileAbout.textContent;
- // editProfilePopup.classList.add('popup_opened');
-//};
-
-//function addClick() {
-  //addPlacePopup.classList.add('popup-place_opened');
-//};
-
-//function closeProfilePopup() {
-  //editProfilePopup.classList.remove('popup_opened');
-//}
-//function closePlacePopup() {
-//  addPlacePopup.classList.remove('popup-place_opened');
-//};
 
 function openImagePopup() {
   modal.classList.add('popup-image_opened');
@@ -101,7 +83,6 @@ function formProfileSubmitHandler(evt) {
   evt.preventDefault();
   profileAbout.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
-  //closeProfilePopup();
   closePopup(editProfilePopup);
 };
 
