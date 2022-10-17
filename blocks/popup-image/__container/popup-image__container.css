@@ -1,7 +1,7 @@
 .popup-image__container {
   background: #000000;
-  width: 75vw;
-  height: 75vh;
+  max-width: 75vw;
+
 opacity: 0.9;
 
   display: flex;
