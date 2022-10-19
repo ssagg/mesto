@@ -37,25 +37,19 @@ const editProfilePopup = document.getElementById('popup-edit');
 const addPlacePopup = document.getElementById('popup-add')
 
 const popupClose = document.querySelector('.popup__button-close');
-
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__about');
-let formElement = document.querySelector('.popup__container');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_about');
-
-let popupPlaceClose = document.querySelector('.popup-place__button-close');
-let formPlaceElement = document.querySelector('.popup-place__container');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__about');
+const formElement = document.querySelector('.popup__container');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_about');
+const popupPlaceClose = document.querySelector('.popup-place__button-close');
+const formPlaceElement = document.querySelector('.popup-place__container');
 const placeInputName = document.getElementById('place-name');
 const placeInputLink = document.getElementById('place-link')
-
-
-const modal = document.querySelector('.popup-image');
-const popupImage = document.querySelector('.popup-image__image')
+const popupImage = document.querySelector('.popup-image');
+const popupImageData = document.querySelector('.popup-image__image')
 const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
-
-
 const delBtn = document.querySelector('.card__delete');
 const likeBtn = document.querySelector('.card__icon');
 
@@ -70,14 +64,14 @@ function closePopup(popup) {
 }
 
 function openImagePopup() {
-  modal.classList.add('popup-image_opened');
+  popupImage.classList.add('popup-image_opened');
 }
 function closeImgPopup() {
-  modal.classList.remove('popup-image_opened');
+  popupImage.classList.remove('popup-image_opened');
 }
 
-editProfileButton.addEventListener('click', () => {openPopup(editProfilePopup)});
-addPlaceButton.addEventListener('click', () => {openPopup(addPlacePopup)});
+editProfileButton.addEventListener('click', () => { openPopup(editProfilePopup) });
+addPlaceButton.addEventListener('click', () => { openPopup(addPlacePopup) });
 
 function formProfileSubmitHandler(evt) {
   evt.preventDefault();
@@ -87,8 +81,8 @@ function formProfileSubmitHandler(evt) {
 };
 
 formElement.addEventListener('submit', formProfileSubmitHandler);
-popupClose.addEventListener('click', () => {closePopup(editProfilePopup)});
-popupPlaceClose.addEventListener('click', () => {closePopup(addPlacePopup)});
+popupClose.addEventListener('click', () => { closePopup(editProfilePopup) });
+popupPlaceClose.addEventListener('click', () => { closePopup(addPlacePopup) });
 popupImgClose.addEventListener('click', closeImgPopup);
 
 const render = () => {
@@ -100,12 +94,12 @@ const render = () => {
 };
 const createItemNode = (name, link) => {
   const currentItem = template.content.cloneNode(true);
-  const cardLink = currentItem.querySelector('.card__image');
+  const cardImage = currentItem.querySelector('.card__image');
   const cardName = currentItem.querySelector('.card__title');
   const cardLike = currentItem.querySelector('.card__icon');
   const delButton = currentItem.querySelector('.card__delete');
-  cardLink.src = link;
-  cardLink.alt = name;
+  cardImage.src = link;
+  cardImage.alt = name;
   cardName.textContent = name;
 
   cardLike.addEventListener('click', function (evt) {
@@ -114,9 +108,9 @@ const createItemNode = (name, link) => {
 
   delButton.addEventListener('click', handleDelBtn);
 
-  cardLink.addEventListener('click', function (evt) {
-    popupImage.src = cardLink.src;
-    popupImage.alt = cardLink.alt;
+  cardImage.addEventListener('click', function (evt) {
+    popupImageData.src = cardImage.src;
+    popupImageData.alt = cardImage.alt;
     popupImgTitle.textContent = cardName.textContent;
 
     openImagePopup();
