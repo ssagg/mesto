@@ -6,9 +6,11 @@ const button = form.querySelector('#button');
 
 const setSubmitBtnState = (isActive) => {
   if (isActive) {
+    button.removeAttribute('disabled')
     button.classList.remove('popup__button_disabled');
     button.classList.add('popup__button-submit');
   } else {
+    button.setAttribute('disabled', true)
     button.classList.add('popup__button_disabled');
     button.classList.remove('popup__button-submit');
   }
