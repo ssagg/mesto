@@ -23,12 +23,10 @@ const formPlace= document.forms.place_edit;
 const imagePopupData = document.querySelector('.popup-image__image')
 const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
-const delBtn = document.querySelector('.card__delete');
-const likeBtn = document.querySelector('.card__icon');
+const buttonDel = document.querySelector('.card__delete');
+const buttonLike = document.querySelector('.card__icon');
 
 function openPopup(popup) {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileAbout.textContent;
   popup.classList.add('popup_opened');
 };
 
@@ -36,11 +34,17 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function openPopupProfile() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileAbout.textContent;
+  openPopup(profilePopup);
+};
+
 function submitFormProfile(evt) {
   evt.preventDefault();
   profileAbout.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
-  closePopup(profilePopup);
+  //closePopup(profilePopup);
 };
 
 const render = () => {
@@ -60,8 +64,8 @@ const createItemNode = (name, link) => {
   cardImage.src = link;
   cardImage.alt = name;
   cardName.textContent = name;
-  cardLike.addEventListener('click', handleLikeBtn);
-  delButton.addEventListener('click', handleDelBtn);
+  cardLike.addEventListener('click', handleButtonLike);
+  delButton.addEventListener('click', handleButtonDel);
   cardImage.addEventListener('click', ()=> {
     imagePopupData.src = cardImage.src;
     imagePopupData.alt = cardImage.alt;
@@ -80,16 +84,16 @@ const handleAddBtn = (evt) => {
   closePopup(placePopup);
 };
 
-const handleDelBtn = (evt) => {
+const handleButtonDel = (evt) => {
   const cardEl = evt.target.closest('.card');
   cardEl.remove();
 };
 
-const handleLikeBtn = (evt) => {
+const handleButtonLike = (evt) => {
   evt.target.classList.toggle('card__icon_active');
 };
 
-profileButton.addEventListener('click', () => { openPopup(profilePopup) });
+profileButton.addEventListener('click', openPopupProfile);
 placeButton.addEventListener('click', () => { openPopup(placePopup) });
 formProfile.addEventListener('submit', submitFormProfile);
 popupClose.addEventListener('click', () => { closePopup(profilePopup) });
