@@ -46,11 +46,11 @@
         <form class="popup__form popup-profile__form" name="profile-edit" id="profile-edit" novalidate>
           <input type="text" class="popup__input popup__input_type_name" placeholder="Ваше имя" id="profile-name"
             name="profile-name" minlength="2" maxlength="40" required>
-            <span class="popup__input_type_error" id="profile-name-error"></span>
+            <span class="popup__error_visible" id="profile-name-error"></span>
           <input type="text" class="popup__input popup__input_type_about" placeholder="Род занятий" id="profile-about"
-            name="profile-about" minlength="3" maxlength="200" required>
-            <span class="popup__input_type_error" id="profile-about-error"></span>
-          <button class="popup__button_disabled" type="submit" id="button" disabled>Сохранить</button>
+            name="profile-about" minlength="2" maxlength="200" required>
+            <span class="popup__error_visible" id="profile-about-error"></span>
+          <button class="popup__button-submit" type="submit" id="button">Сохранить</button>
         </form>
       </div>
     </div>
@@ -61,12 +61,12 @@
         <h2 class="popup__title popup-place__title">Новое место</h2>
         <form class="popup__form popup-place__form" name="place_edit" id="place-edit" novalidate>
           <input type="text" class="popup__input popup-place__input popup__input_type_place" placeholder="Название" id="place-name"
-            name="place-name" minlength="2" maxlength="40">
-            <span class="error"></span>
+            name="place-name" minlength="2" maxlength="30" required>
+            <span class="popup__error_visible" id="place-name-error"></span>
           <input type="url" class="popup__input popup-place__input popup__input_type_link" placeholder="Ссылка на картинку" id="place-link"
-            name="place-about">
-            <span class="error"></span>
-          <button class="popup__button-submit popup-place__button-submit" type="submit" id="picture-submit">Сохранить</button>
+            name="place-link" required>
+            <span class="popup__error_visible" id="place-link-error"></span>
+          <button class="popup__button_disabled" type="submit" id="button" disabled>Сохранить</button>
         </form>
       </div>
     </div>
