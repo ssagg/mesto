@@ -25,8 +25,6 @@ const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
 const buttonDel = document.querySelector('.card__delete');
 const buttonLike = document.querySelector('.card__icon');
-<<<<<<< HEAD
-=======
 const popupOverlay = document.querySelectorAll('.popup');
 
 popupOverlay.forEach((overlay) => {
@@ -44,7 +42,6 @@ const keyHandler = (evt) => {
     });
   };
 };
->>>>>>> dev
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
