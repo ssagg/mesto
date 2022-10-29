@@ -11,9 +11,9 @@
   max-width: 358px;
 }
 
-.popup__input:first-child {
+/* .popup__input:first-child {
   margin-bottom: 30px;
-}
+} */
 
 
 @media screen and (max-width: 530px) {

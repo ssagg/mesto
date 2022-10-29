@@ -1,12 +1,7 @@
 .popup__error_visible {
-color: #FF0000;
+  color: #FF0000;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  margin-left: 36px;
-  margin-right: 36px;
-  max-width: 358px;
-  margin-top: 5px;
-  padding: 0;
 }
