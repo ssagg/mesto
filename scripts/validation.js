@@ -5,7 +5,7 @@ const settings = {
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible',
-    popupButton: '.popup_button'
+    popupButton: '.popup__button'
   };
 
 const formElement = document.querySelector(settings.formSelector);
