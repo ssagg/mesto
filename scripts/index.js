@@ -25,14 +25,43 @@ const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
 const buttonDel = document.querySelector('.card__delete');
 const buttonLike = document.querySelector('.card__icon');
+<<<<<<< HEAD
+=======
+const popupOverlay = document.querySelectorAll('.popup');
+
+popupOverlay.forEach((overlay) => {
+  overlay.addEventListener('click', (evt) => {
+    if(evt.target === evt.currentTarget) {
+      closePopup(overlay);
+    };
+  });
+});
+
+const keyHandler = (evt) => {
+  if (evt.key === 'Escape') {
+    popupOverlay.forEach((esc)=> {
+    closePopup(esc);
+    });
+  };
+};
+>>>>>>> dev
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keydown', keyHandler);
+  formPlace.reset();
+};
+
+function openPopupProfile() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileAbout.textContent;
+  openPopup(profilePopup);
+};
 
 function openPopupProfile() {
   nameInput.value = profileName.textContent;
