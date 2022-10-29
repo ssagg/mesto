@@ -1,10 +1,11 @@
 const settings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
-    submitButtonSelector: 'popup__button-submit',
+    submitButtonSelector: '.popup__button-submit',
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
+    errorClass: 'popup__error_visible',
+    popupButton: '.popup_button'
   };
 
 const formElement = document.querySelector(settings.formSelector);
@@ -54,7 +55,7 @@ const checkInputValidity = (formElement, inputElement, settings) => {
 
 const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
-  const buttonElement = formElement.querySelector('#button');
+  const buttonElement = formElement.querySelector(settings.popupButton);
   toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
