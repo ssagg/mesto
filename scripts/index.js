@@ -17,9 +17,9 @@ const jobInput = document.querySelector('.popup__input_type_about');
 const popupPlaceClose = document.querySelector('.popup-place__button-close');
 const formPlaceElement = document.querySelector('.popup-place__container');
 const placeInputName = document.getElementById('place-name');
-const placeInputLink = document.getElementById('place-link')
+const placeInputLink = document.getElementById('place-link');
 const formPlace= document.forms.place_edit;
-
+const placePopupSubmit = document.getElementById('button-place');
 const imagePopupData = document.querySelector('.popup-image__image')
 const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
@@ -100,9 +100,9 @@ const createItemNode = (name, link) => {
 const handleAddBtn = (evt) => {
   evt.preventDefault();
   const item = createItemNode(placeInputName.value, placeInputLink.value);
-  formPlace.reset();
   container.prepend(item);
   closePopup(placePopup);
+  deactivateButton(placePopupSubmit, settings);
 };
 
 const handleButtonDel = (evt) => {
@@ -117,14 +117,11 @@ const handleButtonLike = (evt) => {
 profileButton.addEventListener('click', openPopupProfile);
 placeButton.addEventListener('click', () => {
   openPopup(placePopup);
-  enableValidation(settings);
+  formPlace.reset();
 });
 formProfile.addEventListener('submit', submitFormProfile);
 popupClose.addEventListener('click', () => {closePopup(profilePopup)});
-popupPlaceClose.addEventListener('click', () => {
-  closePopup(placePopup);
-  formPlace.reset();
- });
+popupPlaceClose.addEventListener('click', () => {closePopup(placePopup);});
 popupImgClose.addEventListener('click', () => {closePopup(imagePopup)});
 
 render();

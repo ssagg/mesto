@@ -26,15 +26,23 @@ const hideError = (formElement, inputElement, settings) => {
   formError.textContent = "";
 };
 
+const deactivateButton = (buttonElement, settings) => {
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(settings.inactiveButtonClass);
+  buttonElement.classList.remove(settings.submitButtonSelector);
+};
+
+const activateButton = (buttonElement, settings) => {
+  buttonElement.removeAttribute('disabled');
+  buttonElement.classList.remove(settings.inactiveButtonClass);
+  buttonElement.classList.add(settings.submitButtonSelector);
+}
+
 const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.classList.remove(settings.submitButtonSelector);
+    deactivateButton(buttonElement, settings);
   } else {
-    buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.classList.add(settings.submitButtonSelector);
+    activateButton(buttonElement, settings);
   };
 };
 
