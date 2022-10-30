@@ -25,9 +25,9 @@ const popupImgClose = document.querySelector('.popup-image__button-close');
 const popupImgTitle = document.querySelector('.popup-image__title')
 const buttonDel = document.querySelector('.card__delete');
 const buttonLike = document.querySelector('.card__icon');
-const popupOverlay = document.querySelectorAll('.popup');
+const popupOverlays = document.querySelectorAll('.popup');
 
-popupOverlay.forEach((overlay) => {
+popupOverlays.forEach((overlay) => {
   overlay.addEventListener('click', (evt) => {
     if(evt.target === evt.currentTarget) {
       closePopup(overlay);
@@ -35,9 +35,9 @@ popupOverlay.forEach((overlay) => {
   });
 });
 
-const keyHandler = (evt) => {
+const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
-    popupOverlay.forEach((esc)=> {
+    popupOverlays.forEach((esc)=> {
     closePopup(esc);
     });
   };
@@ -45,25 +45,20 @@ const keyHandler = (evt) => {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keydown', closeByEscape);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
-  formPlace.reset();
+  document.removeEventListener('keydown', closeByEscape);
 };
 
 function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileAbout.textContent;
   openPopup(profilePopup);
-};
-
-function openPopupProfile() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileAbout.textContent;
-  openPopup(profilePopup);
+  hideError(formElement, nameInput, settings)
+  hideError(formElement, jobInput, settings)
 };
 
 function submitFormProfile(evt) {
@@ -120,10 +115,16 @@ const handleButtonLike = (evt) => {
 };
 
 profileButton.addEventListener('click', openPopupProfile);
-placeButton.addEventListener('click', () => { openPopup(placePopup) });
+placeButton.addEventListener('click', () => {
+  openPopup(placePopup);
+  enableValidation(settings);
+});
 formProfile.addEventListener('submit', submitFormProfile);
-popupClose.addEventListener('click', () => { closePopup(profilePopup) });
-popupPlaceClose.addEventListener('click', () => { closePopup(placePopup) });
-popupImgClose.addEventListener('click', () => { closePopup(imagePopup) });
+popupClose.addEventListener('click', () => {closePopup(profilePopup)});
+popupPlaceClose.addEventListener('click', () => {
+  closePopup(placePopup);
+  formPlace.reset();
+ });
+popupImgClose.addEventListener('click', () => {closePopup(imagePopup)});
 
 render();
