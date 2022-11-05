@@ -68,6 +68,17 @@ function submitFormProfile(evt) {
   closePopup(profilePopup);
 };
 
+const handleAddBtn = (evt) => {
+  evt.preventDefault();
+  const card = new Card (placeInputName.value, placeInputLink.value)
+  const cardElement = card.generateCard()
+  document.querySelector('.elements').prepend(cardElement);
+  // const item = createItemNode(placeInputName.value, placeInputLink.value);
+  // container.prepend(item);
+  closePopup(placePopup);
+  deactivateButton(placePopupSubmit, settings);
+};
+
 // const render = () => {
 //   initialCards.forEach((item) => {
 //     const currentItem = createItemNode(item.name, item.link);
@@ -77,21 +88,26 @@ function submitFormProfile(evt) {
 // };
 
 class Card {
-  constructor(data){
-    this._name = data.name;
-    this._link = data.link;
+  constructor(name,link){
+    this._name = name;
+    this._link = link;
   }
 
-
-
   _setEventListeners() {
-    this._element.addEventListener('click', ()=> {
+    this._element.querySelector('.card__icon').addEventListener('click', ()=> {
       this._handleButtonLike()
     });
 
-    this._element.addEventListener('click', ()=> {
+    this._element.querySelector('.card__delete').addEventListener('click', ()=> {
       this._handleButtonDel()
     });
+    
+    this._element.querySelector('.card__image').addEventListener('click', ()=> {
+          imagePopupData.src = this._link;
+          imagePopupData.alt = this._name;
+          popupImgTitle.textContent = this._name;
+          openPopup(imagePopup);
+        });
 
   }
   _handleButtonLike() {
@@ -99,6 +115,7 @@ class Card {
   }
 
   _handleButtonDel() {
+
     this._element.closest('.card').remove();
   };
 
@@ -117,11 +134,14 @@ class Card {
     return this._element;
   }
 }
+
   initialCards.forEach((item) => {
-    const card = new Card (item, item)
+    const card = new Card (item.name, item.link)
     const cardElement = card.generateCard()
     document.querySelector('.elements').append(cardElement);
+    
 });
+formPlaceElement.addEventListener('submit', handleAddBtn);
 // const card = new Card (initialCards.name, initialCards.link)
 
 // const createItemNode = (name, link) => {
@@ -145,22 +165,15 @@ class Card {
 //   return currentItem;
 // };
 
-const handleAddBtn = (evt) => {
-  evt.preventDefault();
-  const item = createItemNode(placeInputName.value, placeInputLink.value);
-  container.prepend(item);
-  closePopup(placePopup);
-  deactivateButton(placePopupSubmit, settings);
-};
 
-const handleButtonDel = (evt) => {
-  const cardEl = evt.target.closest('.card');
-  cardEl.remove();
-};
+// const handleButtonDel = (evt) => {
+//   const cardEl = evt.target.closest('.card');
+//   cardEl.remove();
+// };
 
-const handleButtonLike = (evt) => {
-  evt.target.classList.toggle('card__icon_active');
-};
+// const handleButtonLike = (evt) => {
+//   evt.target.classList.toggle('card__icon_active');
+// };
 
 profileButton.addEventListener('click', openPopupProfile);
 placeButton.addEventListener('click', () => {
@@ -172,4 +185,4 @@ popupClose.addEventListener('click', () => {closePopup(profilePopup)});
 popupPlaceClose.addEventListener('click', () => {closePopup(placePopup);});
 popupImgClose.addEventListener('click', () => {closePopup(imagePopup)});
 
- render();
+//  render();

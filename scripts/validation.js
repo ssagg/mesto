@@ -12,6 +12,30 @@ const formElement = document.querySelector(settings.formSelector);
 const formInput = formElement.querySelector(settings.inputSelector)
 const formError = formElement.querySelector(`#${formInput.id}-error`);
 
+// class FormValidator {
+//   constructor(settings, formElement){
+//     this._formSelector = settings.formSelector;
+//     this._inputSelector = settings.inputSelector;
+//   }
+
+//   _checkInputValidity(){
+
+//   }
+//   enableValidation(){
+
+//   }
+
+//   const enableValidation = (settings) => {
+//     const formList = Array.from(document.querySelectorAll(settings.formSelector));
+//     formList.forEach((formElement) => {
+//       const valid = new FormValidator ()
+//       const validInput = valid.enableValidation()
+
+//     });
+//   };
+// }
+
+
 const showError = (formElement, inputElement, errorMessage, settings) => {
   const formError = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
