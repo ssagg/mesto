@@ -10,7 +10,7 @@ const settings = {
 
 const formElement = document.querySelector(settings.formSelector);
 const formInput = formElement.querySelector(settings.inputSelector)
-const formError = formElement.querySelector(`#${formInput.id}-error`);
+// const formError = formElement.querySelector(`#${formInput.id}-error`);
 
 class FormValidator {
   constructor(settings, formElement){
@@ -78,36 +78,26 @@ class FormValidator {
 
   _setEventListeners=(settings, formElement)=>{
     console.log('set listener')
+
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     console.log(inputList)
     const buttonElement = this._formElement.querySelector(this._popupButton);
-    this._toggleButtonState(inputList, buttonElement, settings);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
          this._checkInputValidity(formElement, inputElement, settings),
-
          this._toggleButtonState(inputList, buttonElement, settings),
          console.log('set listener count')
     });
-
     });
   }
-
 
   enableValidation=()=>{
     console.log("enable validation")
    this._setEventListeners();
   };
-
   }
 
-
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    const valid = new FormValidator (settings, formElement);
-    valid.enableValidation();
-    console.log(valid)
-  });
+  export {FormValidator, settings, formElement}
 
 
 
