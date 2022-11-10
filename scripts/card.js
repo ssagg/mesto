@@ -1,9 +1,11 @@
 import { openCard } from './index.js'
 class Card {
-  constructor(name, link, templateSelector) {
+  constructor(name, link, templateSelector, openCard) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
+    this._openCard = openCard;
+
   }
 
   _setEventListeners() {
@@ -30,7 +32,7 @@ class Card {
 
   _handleButtonDel() {
 
-    this._element.closest('.card').remove();
+    this._element.remove();
   };
 
   _getTemplate() {
@@ -46,6 +48,10 @@ class Card {
     this._element.querySelector('.card__title').textContent = this._name;
     return this._element;
   }
+createCard(name, link, templateSelector){
+  const card = new Card(name, link, templateSelector);
+  const cardElement = card.generateCard();
+}
 }
 
 export { Card }
