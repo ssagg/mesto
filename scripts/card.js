@@ -8,23 +8,7 @@ class Card {
 
   }
 
-  _setEventListeners() {
-    this._element.querySelector('.card__icon').addEventListener('click', () => {
-      this._handleButtonLike()
-    });
 
-    this._element.querySelector('.card__delete').addEventListener('click', () => {
-      this._handleButtonDel()
-    });
-
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      // imagePopupData.src = this._link;
-      // imagePopupData.alt = this._name;
-      // popupImgTitle.textContent = this._name;
-      openCard(this._name, this._link);
-    });
-
-  }
 
   _handleButtonLike() {
     this._element.querySelector('.card__icon').classList.toggle('card__icon_active');
@@ -42,16 +26,43 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
+
+
     this._element.querySelector('.card__image').src = this._link;
     this._element.querySelector('.card__image').alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
+    this._setEventListeners();
+    // this._link = this._element.querySelector('.card__image').src
+    // this._name = this._element.querySelector('.card__title').textContent;
     return this._element;
   }
-createCard(name, link, templateSelector){
-  const card = new Card(name, link, templateSelector);
-  const cardElement = card.generateCard();
+// createCard(name, link, templateSelector){
+//   const card = new Card(name, link, templateSelector);
+//   const cardElement = card.generateCard();
+//   return cardElement
+// }
+
+
+
+_setEventListeners() {
+  this._element.querySelector('.card__icon').addEventListener('click', () => {
+    this._handleButtonLike()
+  });
+
+  this._element.querySelector('.card__delete').addEventListener('click', () => {
+    this._handleButtonDel()
+  });
+
+  this._element.querySelector('.card__image').addEventListener('click', () => {
+    // imagePopupData.src = this._link;
+    // imagePopupData.alt = this._name;
+    // popupImgTitle.textContent = this._name;
+    this._openCard(this._name, this._link)
+  });
+
 }
 }
+
+
 
 export { Card }

@@ -6,6 +6,11 @@
   border-radius: 2px;
 }
 
+/* .popup__button-disabled:hover {
+  opacity: 0;
+  cursor:none;
+} */
+
 /* @media screen and (max-width: 530px) {
   .popup__button_disabled {
 

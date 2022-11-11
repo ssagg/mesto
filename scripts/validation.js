@@ -142,6 +142,8 @@ class FormValidator {
     formError.textContent = "";
   };
 
+
+
   deactivateButton = () => {
     this._buttonElement.setAttribute('disabled', true);
     this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -190,6 +192,22 @@ class FormValidator {
   enableValidation = () => {
     this._setEventListeners();
   };
+
+  createValidation() {
+    const validation = new FormValidator(settings, formElement)
+validation.enableValidation();
+  }
+
+  hidePopupErrors = (formElement, settings) => {
+    this._inputList.forEach((inputElement) => {
+      // return inputElement;
+      this._hideError(formElement, inputElement, settings)
+    })
+    // this._hideError(formElement, inputElement, settings);
+    // this.deactivateButton()
+    // this._toggleButtonState(this._inputList,  settings)
+  };
+
 }
 
 export { FormValidator}
