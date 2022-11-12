@@ -48,7 +48,7 @@
           <input type="text" class="popup__input popup__input_type_about" placeholder="Род занятий" id="profile-about"
             name="profile-about" minlength="2" maxlength="200" required>
             <span class="popup__error popup__error_visible" id="profile-about-error"></span>
-          <button class="popup__button popup__button-submit" type="submit" id="button-profile">Сохранить</button>
+          <button class="popup__button" type="submit" id="button-profile">Сохранить</button>
         </form>
       </div>
     </div>
@@ -64,14 +64,14 @@
           <input type="url" class="popup__input popup-place__input popup__input_type_link" placeholder="Ссылка на картинку" id="place-link"
             name="place-link" required>
             <span class="popup__error popup__error_visible" id="place-link-error"></span>
-          <button class="popup__button popup__button-submit popup__button_disabled" type="submit" id="button-place" disabled>Сохранить</button>
+          <button class="popup__button popup__button_disabled" type="submit" id="button-place" disabled>Сохранить</button>
         </form>
       </div>
     </div>
 
     <div class="popup popup-image" id="popup-image">
       <div class="popup-image__container">
-        <button aria-label="Close" class="popup-image__button-close" type="button"></button>
+        <button aria-label="Close" class="popup__button-close popup-image__button-close" type="button"></button>
         <img class="popup-image__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Картинка 1">
         <div class="popup-image__title" id="caption">Заголовок</div>
       </div>

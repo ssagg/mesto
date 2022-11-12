@@ -1,4 +1,6 @@
 .popup__button {
+  color: white;
+  background-color: black;
   max-width: 358px;
   height: 50px;
   font-weight: 400;
@@ -9,11 +11,10 @@
   border: 1px;
 }
 
-
-/* .popup__button:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  } */
+.popup__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 530px) {
   .popup__button {
