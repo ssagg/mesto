@@ -10,7 +10,7 @@ class FormValidator {
     this._formElement = formElement;
     this._buttonElement = this._formElement.querySelector(this._popupButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    this._formInput = this._formElement.querySelector(settings.inputSelector)
+    // this._formInput = this._formElement.querySelector(settings.inputSelector)
   }
 
   hidePopupErrors = (formElement, settings) => {
@@ -44,11 +44,11 @@ class FormValidator {
     this._buttonElement.classList.remove(this._inactiveButtonClass);
   }
 
-  _toggleButtonState = (inputList, buttonElement, settings) => {
-    if (this._hasInvalidInput(inputList)) {
-      this.deactivateButton(buttonElement, settings);
+  _toggleButtonState = (settings) => {
+    if (this._hasInvalidInput(this._inputList)) {
+      this.deactivateButton(this._buttonElement, settings);
     } else {
-      this._activateButton(buttonElement, settings);
+      this._activateButton(this._buttonElement, settings);
     };
   };
 
@@ -60,7 +60,7 @@ class FormValidator {
 
   _checkInputValidity(formElement, inputElement, settings) {
     if (!inputElement.validity.valid) {
-      this._showError(formElement, inputElement, this._formInput.validationMessage, settings);
+      this._showError(formElement, inputElement, inputElement.validationMessage, settings);
     } else {
       this._hideError(formElement, inputElement, settings);
     };
