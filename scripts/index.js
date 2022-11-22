@@ -29,7 +29,6 @@ const formPlace = document.forms.place_edit;
 const imagePopupData = document.querySelector('.popup-image__image');
 const popupImgTitle = document.querySelector('.popup-image__title');
 const popups = document.querySelectorAll('.popup');
-const popup1 = document.querySelector('.popup_opened');
 const validatorProfile = new FormValidator(settings, profilePopup)
 const validatorPlace = new FormValidator(settings, placePopup)
 validatorProfile.enableValidation();
@@ -108,4 +107,3 @@ formPlaceElement.addEventListener('submit', handleAddBtn);
 profileButton.addEventListener('click', openPopupProfile);
 placeButton.addEventListener('click', openPopupPlace);
 formProfile.addEventListener('submit', submitFormProfile);
-console.log(formPlaceElement)
