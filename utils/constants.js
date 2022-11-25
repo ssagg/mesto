@@ -53,11 +53,13 @@ const settings = {
   const popupImgTitle = document.querySelector('.popup-image__title');
   const popups = document.querySelectorAll('.popup');
 
-  const validatorProfile = new FormValidator(settings, profilePopup)
-  const validatorPlace = new FormValidator(settings, placePopup)
-  validatorProfile.enableValidation();
-  validatorPlace.enableValidation();
+  // const validatorProfile = new FormValidator(settings, profilePopup)
+  // const validatorPlace = new FormValidator(settings, placePopup)
+  // validatorProfile.enableValidation();
+  // validatorPlace.enableValidation();
+
+const containerTest = '.elements';
 
   export {initialCards, settings, container, profileButton, placeButton, profilePopup, placePopup, imagePopup,
   profileName, profileAbout, formProfile, nameInput, jobInput, formPlaceElement, placeInputName, placeInputLink,
-formPlace, imagePopupData, popupImgTitle, popups}
+formPlace, imagePopupData, popupImgTitle, popups, containerTest}
