@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
+
   <script type="module" src="./pages/index.js"></script>
   <title>Mesto</title>
 </head>
@@ -12,11 +12,11 @@
 <body class="root">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo/logo.svg" alt="логотип">
+      <img class="header__logo" src="<%=require('./images/logo/logo.svg')%>" alt="логотип">
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.png" alt="аватар">
+        <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button aria-label="Редактировать профиль"  class="profile__edit-button" type="button">
@@ -80,7 +80,7 @@
 
   <template class="template card-template_type_default">
     <div class="card">
-      <img class="card__image" src="./images/baikal.jpg" alt="байкал">
+      <img class="card__image" src="<%=require('./images/baikal.jpg')%>" alt="байкал">
       <button aria-label="Удалить" class="card__delete" type="button"></button>
       <div class="card__text">
         <h3 class="card__title">Байкал</h3>
