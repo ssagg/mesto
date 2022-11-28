@@ -1,6 +1,6 @@
 class Card {
 
-  constructor(name, link, templateSelector, openCard) {
+  constructor(name, link, templateSelector, {openCard}) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
@@ -13,6 +13,7 @@ class Card {
 
   _handleButtonDel() {
     this._element.remove();
+    this._element = null;
   };
 
   _getTemplate() {

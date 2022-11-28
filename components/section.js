@@ -4,23 +4,18 @@ export default class Section {
         this._initialCards = cards;
         this._container = document.querySelector(containerSelector);
         this._renderer = renderer;
-
 }
 
-
 render(){
-this._initialCards.forEach((item)=>   this._renderer(item)
+  this._initialCards.forEach((item) => this._renderer(item))
 // const card = new Card(item.name, item.link, '.card-template_type_default', openCard);
     // const cardElement = card.generateCard();
     // this._addItem(cardElement);
-)
 }
 addItem(element){
-   this._container.append(element);
-
-}
-
-}
+  this._container.append(element);
+  };
+};
 
 
 // const createCard = (name, link) => {

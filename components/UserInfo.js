@@ -6,15 +6,13 @@ export default class UserInfo{
     this._profileAbout = profileAbout;
     this._nameInput = document.querySelector('.popup__input_type_name');
     this._jobInput = document.querySelector('.popup__input_type_about');
-
-
     }
+
     getUserInfo(){
     this._nameInput.value = this._profileName.textContent;
     this._jobInput.value = this._profileAbout.textContent;
-
-
     }
+
     setUserInfo(){
     this._profileAbout.textContent = this._jobInput.value;
     this._profileName.textContent = this._nameInput.value;

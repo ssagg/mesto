@@ -1,71 +1,74 @@
 export default class Popup {
-    constructor(popupSelector) {
-        this._popupSelector = popupSelector;
+  constructor(popupSelector) {
+    this._popupSelector = popupSelector;
+  };
 
-}
-open(){
-  this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEscape);
-}
-close(){
-  this._popupSelector.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeByEscape);
-}
-_handleEscClose(){
-      const closeByEscape = (evt) => {
+  open() {
+    this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose);
+  };
 
-        if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
-          close(document.querySelector('.popup_opened'))
-        };
+  close() {
+    this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
+  };
+
+  _handleEscClose = (evt)=> {
+    // const closeByEscape = (evt) => {
+      if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
+        // close(document.querySelector('.popup_opened'))
+        this.close()
       };
+    };
     // const closeByEscape = (evt) => {
 
     //     if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
     //       closePopup(document.querySelector('.popup_opened'))
     //     };
     //   };
-}
-setEventListeners(){
-  this._popupSelector.forEach((popup) => {
-    this._popupSelector.addEventListener('mousedown', (evt) => {
-          if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-close') ) {
-            closePopup(popup)
-          }
-        })
-      })
-}
-}
 
-class PopupWithImage extends Popup {
-    constructor(popupSelector) {
-        super(popupSelector);
-}
-open(name, link){
-super.open()
-this._image.src = this._link;
-this._image.alt = this._name;
-imagePopupData.src = link;
-imagePopupData.alt = name;
-popupImgTitle.textContent = name;
+  setEventListeners (){
+    // this._popupSelector.forEach((popup) => {
+      this._popupSelector.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-close')) {
+          // closePopup(popup)
+          this.close();
+        };
+      });
+    // })
+  };
+};
 
-}
-}
+// class PopupWithImage extends Popup {
+//   constructor(popupSelector) {
+//     super(popupSelector);
+//   }
+//   open(name, link) {
+//     super.open()
+//     this._image.src = this._link;
+//     this._image.alt = this._name;
+//     imagePopupData.src = link;
+//     imagePopupData.alt = name;
+//     popupImgTitle.textContent = name;
 
-class PopupWithForm extends Popup {
-    constructor(popupSelector, callback) {
-    }
-    //Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
-    _getInputValues(){
+//   }
+// }
+
+// class PopupWithForm extends Popup {
+//   constructor(popupSelector, callback) {
+//   }
+//   //Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
+//   _getInputValues() {
 
 
-    }
-    setEventListeners(){
+//   }
+//   setEventListeners() {
 
-    }
-    close(){
+//   }
+//   close() {
 
-    }
-}
+//   }
+// }
 // Класс `UserInfo` отвечает за управление отображением информации о пользователе на странице. Этот класс:
 
 // - Принимает в конструктор объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе.
