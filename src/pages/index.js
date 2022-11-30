@@ -1,3 +1,4 @@
+import "./index.css";
 import Card from "../components/Сard.js";
 import { initialCards } from "../utils/cards-array-constants.js";
 import FormValidator from "../components/FormValidator.js";
