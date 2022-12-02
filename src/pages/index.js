@@ -1,11 +1,12 @@
-import "./index.css";
+// import "./index.css";
 import Card from "../components/Сard.js";
-import { initialCards } from "../utils/cards-array-constants.js";
+// import { initialCards } from "../utils/cards-array-constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import Api from "../components/Api.js";
 import {
   validationConfig,
   containerTest,
@@ -16,16 +17,36 @@ import {
   profilePopup,
   placePopup,
   imagePopup,
-  profileName,
-  profileAbout,
+  // profileName,
+  // profileAbout,
 } from "../utils/constants.js";
+
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-55",
+  headers: {
+    authorization: "122ed227-619a-45d1-b0b1-3d475c480eb1",
+    "Content-Type": "application/json",
+  },
+});
 
 const validatorProfile = new FormValidator(validationConfig, profilePopup);
 const validatorPlace = new FormValidator(validationConfig, placePopup);
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 
-const userInfo = new UserInfo(profileName, profileAbout);
+api.getUserInfo().then((res) => {
+  UserInfo.setUserInfo(res);
+  console.log(UserInfo.setUserInfo(res));
+});
+
+// function generateUserInfo(userServerInfo) {
+//   console.log(userServerInfo);
+//   console.log(userServerInfo.name);
+//   console.log(userServerInfo.about);
+const userInfo = new UserInfo(userServerInfo.name, userServerInfo.about);
+
+// const userInfo = new UserInfo(profileName, profileAbout);
+// }
 const popupImage = new PopupWithImage(imagePopup);
 
 const popupProfileForm = new PopupWithForm(profilePopup, {
@@ -34,6 +55,7 @@ const popupProfileForm = new PopupWithForm(profilePopup, {
     popupProfileForm.close();
   },
 });
+
 function createCard(item) {
   const card = new Card(item.name, item.link, ".card-template_type_default", {
     handleImageClick: () => {
@@ -52,24 +74,29 @@ const popupPlaceForm = new PopupWithForm(placePopup, {
   },
 });
 
-const defaultCardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      createCard(item);
-      defaultCardList.addItem(createCard(item));
-    },
-  },
-  containerTest
-);
-defaultCardList.render();
+// api.getUserInfo();
+api.getInitialCards().then((res) => createCardArray(res));
 
+function createCardArray(initialServerCards) {
+  const defaultCardList = new Section(
+    {
+      items: initialServerCards.reverse(),
+      renderer: (item) => {
+        createCard(item);
+        defaultCardList.addItem(createCard(item));
+      },
+    },
+    containerTest
+  );
+  defaultCardList.render();
+}
 popupProfileForm.setEventListeners();
 popupPlaceForm.setEventListeners();
 popupImage.setEventListeners();
 
 function generatePopupProfile() {
-  const userData = userInfo.getUserInfo();
+  // const userData = userInfo.getUserInfo();
+  userData = generateUserInfo(userServerInfo);
   popupProfileForm.open();
   userData;
   nameInput.value = userData.name;
