@@ -34,59 +34,62 @@ const popupProfileForm = new PopupWithForm(profilePopup, {
     popupProfileForm.close();
   },
 });
-function createCard(item) {
-  const card = new Card(item.name, item.link, ".card-template_type_default", {
-    handleImageClick: () => {
-      popupImage.open(item.name, item.link);
-    },
-  });
+
+function createCard(cardData) {
+  const card = new Card(
+    cardData.name,
+    cardData.link,
+    ".card-template_type_default",
+    {
+      handleImageClick: () => {
+        popupImage.open(cardData.name, cardData.link);
+      },
+    }
+  );
   const cardElement = card.generateCard();
   return cardElement;
 }
 
 const popupPlaceForm = new PopupWithForm(placePopup, {
-  handleFormSubmit: (item) => {
-    createCard(item);
-    defaultCardList.addItem(createCard(item));
+  handleFormSubmit: (cardData) => {
+    cardsSection.addItem(createCard(cardData));
     popupPlaceForm.close();
   },
 });
 
-const defaultCardList = new Section(
+const cardsSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      createCard(item);
-      defaultCardList.addItem(createCard(item));
+      cardsSection.addItem(createCard(item));
     },
   },
   containerTest
 );
-defaultCardList.render();
+cardsSection.render();
 
 popupProfileForm.setEventListeners();
 popupPlaceForm.setEventListeners();
 popupImage.setEventListeners();
 
-function generatePopupProfile() {
+function openProfilePopup() {
   const userData = userInfo.getUserInfo();
   popupProfileForm.open();
-  userData;
   nameInput.value = userData.name;
   jobInput.value = userData.description;
   validatorProfile.resetValidationErrors();
 }
 
-function generatePopupPlace() {
+function openPlacePopup() {
   popupPlaceForm.open();
   validatorPlace.resetValidationErrors();
   validatorPlace.deactivateButton();
 }
 
 profileButton.addEventListener("click", () => {
-  generatePopupProfile();
+  openProfilePopup();
 });
 
 placeButton.addEventListener("click", () => {
-  generatePopupPlace();
+  openPlacePopup();
 });
