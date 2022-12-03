@@ -42,6 +42,7 @@ export default class Api {
 
     // другие методы работы с API
   }
+
   addNewCard({ name, link }) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-55/cards", {
       method: "POST",
@@ -62,6 +63,7 @@ export default class Api {
       //   return result;
     });
   }
+
   deleteCard(id) {
     return fetch(`https://mesto.nomoreparties.co/v1/cohort-55/cards${id}`, {
       method: "DELETE",
@@ -72,6 +74,7 @@ export default class Api {
       // body: JSON.stringify({id}),
     }).then((res) => {
       if (res.ok) {
+        console.log(res.json());
         return res.json();
       } else {
         Promise.reject("Error happened");

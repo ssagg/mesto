@@ -74,7 +74,7 @@ const popupPlaceForm = new PopupWithForm(placePopup, {
       .catch((error) => {
         console.log(error);
       });
-    defaultCardList.addItem(createCard(newCard));
+    // defaultCardList.addItem(createCard(newCard));
     popupPlaceForm.close();
   },
 });
