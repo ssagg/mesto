@@ -17,8 +17,8 @@ import {
   profilePopup,
   placePopup,
   imagePopup,
-  // profileName,
-  // profileAbout,
+  profileName,
+  profileAbout,
 } from "../utils/constants.js";
 
 const api = new Api({
@@ -34,18 +34,15 @@ const validatorPlace = new FormValidator(validationConfig, placePopup);
 validatorProfile.enableValidation();
 validatorPlace.enableValidation();
 
-api.getUserInfo().then((res) => {
-  UserInfo.setUserInfo(res);
-  console.log(UserInfo.setUserInfo(res));
-});
+// api.getUserInfo().then((res) => UserInfo.setUserInfo(res));
 
 // function generateUserInfo(userServerInfo) {
 //   console.log(userServerInfo);
 //   console.log(userServerInfo.name);
 //   console.log(userServerInfo.about);
-const userInfo = new UserInfo(userServerInfo.name, userServerInfo.about);
+// const userInfo = new UserInfo(userServerInfo.name, userServerInfo.about);
 
-// const userInfo = new UserInfo(profileName, profileAbout);
+const userInfo = new UserInfo(profileName, profileAbout);
 // }
 const popupImage = new PopupWithImage(imagePopup);
 
@@ -67,29 +64,58 @@ function createCard(item) {
 }
 
 const popupPlaceForm = new PopupWithForm(placePopup, {
-  handleFormSubmit: (item) => {
-    createCard(item);
-    defaultCardList.addItem(createCard(item));
+  handleFormSubmit: (cardData) => {
+    api
+      .addNewCard({ name: cardData.name, link: cardData.link })
+      .then((newCard) => {
+        console.log(newCard);
+        defaultCardList.addItem(createCard(newCard));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    defaultCardList.addItem(createCard(newCard));
     popupPlaceForm.close();
   },
 });
 
 // api.getUserInfo();
-api.getInitialCards().then((res) => createCardArray(res));
+// api.getInitialCards().then((res) => createCardArray(res));
 
-function createCardArray(initialServerCards) {
-  const defaultCardList = new Section(
-    {
-      items: initialServerCards.reverse(),
-      renderer: (item) => {
-        createCard(item);
-        defaultCardList.addItem(createCard(item));
-      },
+// function createCardArray(initialServerCards) {
+const defaultCardList = new Section(
+  {
+    // items: initialServerCards,
+    renderer: (item) => {
+      defaultCardList.addItem(createCard(item));
     },
-    containerTest
-  );
-  defaultCardList.render();
-}
+  },
+  containerTest
+);
+//   defaultCardList.render();
+// }
+
+api
+  .getInitialCards()
+  .then((initialServerCards) => {
+    defaultCardList.render(initialServerCards);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+// function createCardArray(initialServerCards) {
+//   const defaultCardList = new Section(
+//     {
+//       items: initialServerCards.reverse(),
+//       renderer: (item) => {
+//         defaultCardList.addItem(createCard(item));
+//       },
+//     },
+//     containerTest
+//   );
+//   defaultCardList.render();
+// }
+
 popupProfileForm.setEventListeners();
 popupPlaceForm.setEventListeners();
 popupImage.setEventListeners();
@@ -98,7 +124,7 @@ function generatePopupProfile() {
   // const userData = userInfo.getUserInfo();
   userData = generateUserInfo(userServerInfo);
   popupProfileForm.open();
-  userData;
+
   nameInput.value = userData.name;
   jobInput.value = userData.description;
   validatorProfile.resetValidationErrors();
