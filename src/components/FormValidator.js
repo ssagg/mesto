@@ -40,7 +40,7 @@ export default class FormValidator {
   };
 
   deactivateButton = () => {
-    this._buttonElement.disabled.true;
+    this._buttonElement.disabled = true;
     this._buttonElement.classList.add(this._inactiveButtonClass);
   };
 
