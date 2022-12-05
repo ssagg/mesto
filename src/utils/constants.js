@@ -10,6 +10,7 @@ const validationConfig = {
 const profileButton = document.querySelector(".profile__edit-button");
 const placeButton = document.querySelector(".profile__add-button");
 const profilePopup = document.querySelector(".popup-profile");
+const avatarPopup = document.querySelector(".popup-avatar");
 const placePopup = document.querySelector(".popup-place");
 const imagePopup = document.querySelector(".popup-image");
 const profileName = document.querySelector(".profile__name");
@@ -19,8 +20,14 @@ const jobInput = document.querySelector(".popup__input_type_about");
 const imagePopupData = document.querySelector(".popup-image__image");
 const popupImgTitle = document.querySelector(".popup-image__title");
 const containerTest = ".elements";
+const profileAvatar = document.querySelector(".profile__avatar");
+const cardLikeCounter = document.querySelector(".card__like-counter");
+const cardDeletePopup = document.querySelector(".popup-card-delete");
 
 export {
+  cardDeletePopup,
+  cardLikeCounter,
+  avatarPopup,
   validationConfig,
   profileButton,
   placeButton,
@@ -34,4 +41,5 @@ export {
   imagePopupData,
   popupImgTitle,
   containerTest,
+  profileAvatar,
 };
