@@ -19,6 +19,14 @@ export default class Popup {
     }
   };
 
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._popup.querySelector(".popup__button").textContent = "Сохранение...";
+    } else {
+      this._popup.querySelector(".popup__button").textContent = "Сохранить";
+    }
+  }
+
   setEventListeners() {
     this._popup.addEventListener("mousedown", (evt) => {
       if (

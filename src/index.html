@@ -16,12 +16,14 @@
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.png" alt="аватар">
+        <div class="profile__avatar-overlay">
+          <img class="profile__avatar" src="./images/avatar.png" alt="аватар">
+        </div>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button aria-label="Редактировать профиль"  class="profile__edit-button" type="button">
           </button>
-          <p class="profile__about">Исследователь океана</p>
+          <p class="profile__about"></p>
         </div>
         <button aria-label="Добавить карточку места" class="profile__add-button" type="button">
         </button>
@@ -64,7 +66,7 @@
           <input type="url" class="popup__input popup-place__input popup__input_type_link" placeholder="Ссылка на картинку" id="place-link"
             name="link" required>
             <span class="popup__error popup__error_visible" id="place-link-error"></span>
-          <button class="popup__button popup__button_disabled" type="submit" id="button-place" disabled>Сохранить</button>
+          <button class="popup__button popup__button_disabled" type="submit" id="button-place" disabled>Создать</button>
         </form>
       </div>
     </div>
@@ -83,12 +85,12 @@
     </div>
 
     <div class="popup popup-card-delete" id="popup-card-delete">
-      <div class="popup__container popup-avatar__container">
-        <button aria-label="Закрыть" class="popup__button-close popup-avatar__button-close" type="button"></button>
-        <h2 class="popup__title popup-avatar__title">Обновить аватар</h2>
-        <form class="popup__form popup-card-delete__form" name="card-delete_edit" id="card-delete-edit" novalidate>
+      <div class="popup__container popup-card-delete__container">
+        <button aria-label="Закрыть" class="popup__button-close popup-card-delete__button-close" type="button"></button>
+        <h2 class="popup__title popup-card-delete__title">Вы уверены?</h2>
+        <form class="popup__form popup-card-delete__form" name="card-delete_edit" id="card-delete-edit" >
 
-          <button class="popup__button popup__button_disabled" type="submit" id="button-card-delete" disabled>Да</button>
+          <button class="popup__button" type="submit" id="button-card-delete">Да</button>
         </form>
       </div>
     </div>
@@ -108,8 +110,10 @@
       <button aria-label="Удалить" class="card__delete" type="button"></button>
       <div class="card__text">
         <h3 class="card__title">Байкал</h3>
-        <button aria-label="Лайк" class="card__icon" type="button"></button>
-        <div class="card__like-counter">0</div>
+        <div class="card__icon-box">
+          <button aria-label="Лайк" class="card__icon" type="button"></button>
+          <div class="card__like-counter">0</div>
+        </div>
       </div>
     </div>
 </template>

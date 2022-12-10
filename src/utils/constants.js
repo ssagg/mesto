@@ -19,7 +19,7 @@ const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_about");
 const imagePopupData = document.querySelector(".popup-image__image");
 const popupImgTitle = document.querySelector(".popup-image__title");
-const containerTest = ".elements";
+const containerCards = ".elements";
 const profileAvatar = document.querySelector(".profile__avatar");
 const cardLikeCounter = document.querySelector(".card__like-counter");
 const cardDeletePopup = document.querySelector(".popup-card-delete");
@@ -40,6 +40,6 @@ export {
   jobInput,
   imagePopupData,
   popupImgTitle,
-  containerTest,
+  containerCards,
   profileAvatar,
 };
