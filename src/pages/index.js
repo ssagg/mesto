@@ -1,14 +1,15 @@
 import "./index.css";
 import Card from "../components/Сard.js";
-import { initialCards } from "../utils/cards-array-constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
+import { api } from "../components/Api.js";
 import {
   validationConfig,
-  containerTest,
+  containerCards,
   nameInput,
   jobInput,
   profileButton,
@@ -18,78 +19,161 @@ import {
   imagePopup,
   profileName,
   profileAbout,
+  profileAvatar,
+  avatarPopup,
+  cardDeletePopup,
 } from "../utils/constants.js";
 
-const validatorProfile = new FormValidator(validationConfig, profilePopup);
-const validatorPlace = new FormValidator(validationConfig, placePopup);
-validatorProfile.enableValidation();
-validatorPlace.enableValidation();
+let ownerId = "мой id";
 
-const userInfo = new UserInfo(profileName, profileAbout);
-const popupImage = new PopupWithImage(imagePopup);
-
-const popupProfileForm = new PopupWithForm(profilePopup, {
-  handleFormSubmit: (userData) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+  ([userData, initialServerCards]) => {
     userInfo.setUserInfo(userData);
-    popupProfileForm.close();
-  },
+    ownerId = userData._id;
+    cardSection.render(initialServerCards);
+  }
+);
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo(userData);
 });
 
 function createCard(cardData) {
   const card = new Card(
-    cardData.name,
-    cardData.link,
+    cardData,
     ".card-template_type_default",
-    {
-      handleImageClick: () => {
-        popupImage.open(cardData.name, cardData.link);
-      },
-    }
+    () => {
+      popupImage.open(cardData.name, cardData.link);
+    },
+    (id) => {
+      popupDeleteCard.open();
+      popupDeleteCard.changeSubmitHandler(() => {
+        popupDeleteCard.renderLoading(true);
+        api
+          .deleteCard(id)
+          .then(() => {
+            card.deleteCardConfirm();
+            popupDeleteCard.close();
+          })
+          .finally(() => {
+            popupDeleteCard.renderLoading(false);
+          });
+      });
+    },
+    (id) => {
+      if (card.isLiked()) {
+        api.deleteLike(id).then((likesData) => {
+          card.setLike(likesData.likes);
+        });
+      } else {
+        api.setLike(id).then((likesData) => {
+          card.setLike(likesData.likes);
+        });
+      }
+    },
+    ownerId
   );
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-const popupPlaceForm = new PopupWithForm(placePopup, {
-  handleFormSubmit: (cardData) => {
-    cardsSection.addItem(createCard(cardData));
-    popupPlaceForm.close();
-  },
-});
-
-const cardsSection = new Section(
+const cardSection = new Section(
   {
-    items: initialCards,
-    renderer: (item) => {
-      cardsSection.addItem(createCard(item));
+    renderer: (cardData) => {
+      cardSection.addItem(createCard(cardData));
     },
   },
-  containerTest
+  containerCards
 );
-cardsSection.render();
+
+const handleProfileFormSubmit = (userData) => {
+  popupProfileForm.renderLoading(true);
+  api
+    .sendUserInfo({ name: userData.name, about: userData.about })
+    .then((userData) => {
+      userInfo.setUserInfo(userData);
+      popupProfileForm.close();
+    })
+    .finally(() => {
+      popupProfileForm.renderLoading(false);
+    });
+};
+
+const handleAvatarFormSubmit = (avatar) => {
+  popupAvatar.renderLoading(true);
+  api
+    .sendAvatar(avatar)
+    .then((avatar) => {
+      profileAvatar.src = avatar.avatar;
+      popupAvatar.close();
+    })
+    .finally(() => {
+      popupAvatar.renderLoading(false);
+    });
+};
+
+const handleNewCardFormSubmit = (cardData) => {
+  popupPlaceForm.renderLoading(true);
+  api
+    .addNewCard({ name: cardData.name, link: cardData.link })
+    .then((newCard) => {
+      cardSection.addItem(createCard(newCard));
+      popupPlaceForm.close();
+    })
+    .finally(() => {
+      popupPlaceForm.renderLoading(false);
+    });
+};
+
+const validatorProfile = new FormValidator(validationConfig, profilePopup);
+const validatorPlace = new FormValidator(validationConfig, placePopup);
+const validatorAvatar = new FormValidator(validationConfig, avatarPopup);
+
+validatorAvatar.enableValidation();
+validatorProfile.enableValidation();
+validatorPlace.enableValidation();
+
+const userInfo = new UserInfo(profileName, profileAbout, profileAvatar);
+const popupAvatar = new PopupWithForm(avatarPopup, handleAvatarFormSubmit);
+const popupProfileForm = new PopupWithForm(
+  profilePopup,
+  handleProfileFormSubmit
+);
+const popupPlaceForm = new PopupWithForm(placePopup, handleNewCardFormSubmit);
+const popupDeleteCard = new PopupWithSubmit(cardDeletePopup);
+const popupImage = new PopupWithImage(imagePopup);
 
 popupProfileForm.setEventListeners();
 popupPlaceForm.setEventListeners();
 popupImage.setEventListeners();
+popupAvatar.setEventListeners();
+popupDeleteCard.setEventListeners();
 
-function openProfilePopup() {
+function openPopupProfile() {
   const userData = userInfo.getUserInfo();
-  popupProfileForm.open();
   nameInput.value = userData.name;
-  jobInput.value = userData.description;
+  jobInput.value = userData.about;
+  popupProfileForm.open();
   validatorProfile.resetValidationErrors();
 }
 
-function openPlacePopup() {
+function openPopupPlace() {
   popupPlaceForm.open();
   validatorPlace.resetValidationErrors();
   validatorPlace.deactivateButton();
 }
+function openPopupAvatar() {
+  popupAvatar.open();
+  validatorAvatar.resetValidationErrors();
+  validatorAvatar.deactivateButton();
+}
 
 profileButton.addEventListener("click", () => {
-  openProfilePopup();
+  openPopupProfile();
 });
 
 placeButton.addEventListener("click", () => {
-  openPlacePopup();
+  openPopupPlace();
+});
+profileAvatar.addEventListener("click", () => {
+  openPopupAvatar();
 });
