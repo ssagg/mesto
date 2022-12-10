@@ -27,7 +27,7 @@ export default class Card {
 
   _hideDeleteButton() {
     if (this._cardOwnerId !== this._myUserId) {
-      this._element.querySelector(".card__delete").remove();
+      this._deleteButton.remove();
     }
   }
 
