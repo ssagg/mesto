@@ -15,8 +15,4 @@ export default class PopupWithSubmit extends Popup {
       this._handleFormSubmit();
     });
   }
-
-  close() {
-    super.close();
-  }
 }

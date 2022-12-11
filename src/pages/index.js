@@ -26,16 +26,15 @@ import {
 
 let ownerId = "мой id";
 
-Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
-  ([userData, initialServerCards]) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialServerCards]) => {
     userInfo.setUserInfo(userData);
     ownerId = userData._id;
-    cardSection.render(initialServerCards);
-  }
-);
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo(userData);
-});
+    cardSection.render(initialServerCards.reverse());
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 function createCard(cardData) {
   const card = new Card(
@@ -47,27 +46,40 @@ function createCard(cardData) {
     (id) => {
       popupDeleteCard.open();
       popupDeleteCard.changeSubmitHandler(() => {
-        popupDeleteCard.renderLoading(true);
+        popupDeleteCard.renderLoading("Сохранение...");
         api
           .deleteCard(id)
           .then(() => {
             card.deleteCardConfirm();
             popupDeleteCard.close();
           })
+          .catch((error) => {
+            console.log(error);
+          })
           .finally(() => {
-            popupDeleteCard.renderLoading(false);
+            popupDeleteCard.renderLoading("Да");
           });
       });
     },
     (id) => {
       if (card.isLiked()) {
-        api.deleteLike(id).then((likesData) => {
-          card.setLike(likesData.likes);
-        });
+        api
+          .deleteLike(id)
+          .then((likesData) => {
+            card.setLike(likesData.likes);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
-        api.setLike(id).then((likesData) => {
-          card.setLike(likesData.likes);
-        });
+        api
+          .setLike(id)
+          .then((likesData) => {
+            card.setLike(likesData.likes);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     },
     ownerId
@@ -86,41 +98,50 @@ const cardSection = new Section(
 );
 
 const handleProfileFormSubmit = (userData) => {
-  popupProfileForm.renderLoading(true);
+  popupProfileForm.renderLoading("Сохранение...");
   api
     .sendUserInfo({ name: userData.name, about: userData.about })
     .then((userData) => {
       userInfo.setUserInfo(userData);
       popupProfileForm.close();
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
-      popupProfileForm.renderLoading(false);
+      popupProfileForm.renderLoading("Сохранить");
     });
 };
 
 const handleAvatarFormSubmit = (avatar) => {
-  popupAvatar.renderLoading(true);
+  popupAvatar.renderLoading("Сохранение...");
   api
     .sendAvatar(avatar)
     .then((avatar) => {
       profileAvatar.src = avatar.avatar;
       popupAvatar.close();
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
-      popupAvatar.renderLoading(false);
+      popupAvatar.renderLoading("Сохранить");
     });
 };
 
 const handleNewCardFormSubmit = (cardData) => {
-  popupPlaceForm.renderLoading(true);
+  popupPlaceForm.renderLoading("Сохранение...");
   api
     .addNewCard({ name: cardData.name, link: cardData.link })
     .then((newCard) => {
       cardSection.addItem(createCard(newCard));
       popupPlaceForm.close();
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
-      popupPlaceForm.renderLoading(false);
+      popupPlaceForm.renderLoading("Создать");
     });
 };
 

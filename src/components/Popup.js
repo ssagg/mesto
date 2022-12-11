@@ -1,6 +1,7 @@
 export default class Popup {
   constructor(popup) {
     this._popup = popup;
+    this._buttonPopupSubmit = this._popup.querySelector(".popup__button");
   }
 
   open() {
@@ -19,12 +20,8 @@ export default class Popup {
     }
   };
 
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._popup.querySelector(".popup__button").textContent = "Сохранение...";
-    } else {
-      this._popup.querySelector(".popup__button").textContent = "Сохранить";
-    }
+  renderLoading(buttonText) {
+    this._buttonPopupSubmit.textContent = buttonText;
   }
 
   setEventListeners() {

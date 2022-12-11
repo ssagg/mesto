@@ -4,11 +4,15 @@ class Api {
     this._headers = headers;
   }
 
+  _getResponse = (res) => {
+    return res.ok ? res.json() : Promise.reject("Error happened");
+  };
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -20,7 +24,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ name: name, about: about }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -32,7 +36,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ avatar: avatar }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -42,7 +46,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -54,7 +58,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ name, link }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -65,7 +69,7 @@ class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -76,7 +80,7 @@ class Api {
       method: "PUT",
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -87,7 +91,7 @@ class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject("Error happened")))
+      .then(this._getResponse)
       .catch((error) => {
         console.log(error);
       });
