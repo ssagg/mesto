@@ -36,7 +36,7 @@
 .card__text{align-items:center;color:#000;display:flex;flex-direction:row;justify-content:space-between;margin:22px 15px 29px 21px;max-width:246px;padding:0}
 .card__title{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:210px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:910px){.card__title{max-width:160px}}@media screen and (max-width:740px){.card__title{max-width:120px}}@media screen and (max-width:650px){.card__title{max-width:180px}}@media screen and (max-width:540px){.card__title{max-width:160px}}@media screen and (max-width:500px){.card__title{max-width:210px}}
 .card__icon{background-color:transparent;background-image:url(images/87ed371465c7a6a1cd01.svg);background-repeat:no-repeat;border:0;height:19px;width:22px}.card__icon:hover{cursor:pointer;opacity:.5}
-.card__delete{background-color:transparent;background-image:url(images/cbc09a894bdd4c956365.svg);border:0;height:19px;left:87%;position:absolute;top:20px;width:18px}.card__delete:hover{cursor:pointer;opacity:.5}
+.card__delete{background-color:transparent;background-image:url(images/cbc09a894bdd4c956365.svg);background-repeat:no-repeat;border:0;height:19px;left:87%;position:absolute;top:20px;width:18px}.card__delete:hover{cursor:pointer;opacity:.5}
 .card__image{aspect-ratio:1;background-color:#000;border-top-left-radius:10px;border-top-right-radius:10px;max-width:282px;-o-object-fit:cover;object-fit:cover}.card__image:hover{cursor:pointer;opacity:.9}
 .card__icon_active{background-image:url(images/fe17a515669479b1e649.svg);opacity:1}
 .card__like-counter{font-size:13px;font-weight:400;line-height:16px;margin-top:3px}
